@@ -43,3 +43,23 @@ def _calculate_item_total(state_code, item):
     tax_rate = _get_tax_rate(state_code, item['type'])
     return item['price'] * (1 + tax_rate)
 
+def _get_tax_rate(state_code, item_type):
+    """
+    Determine the applicable sales tax rate based on the state and item type.
+
+    Args:
+        state_code (str): The state code.
+        item_type (str): The type of the item.
+
+    Returns:
+        float: The applicable sales tax rate.
+    """
+    # Return tax rates based on state and item type.
+    if item_type == 'Wic Eligible food':
+        return 0
+    if state_code == 'MT':
+        return 0
+    elif state_code == 'ID':
+        return 0.06 if item_type != 'Software' else 0
+    elif state_code == 'WA':
+        return 0.0938
