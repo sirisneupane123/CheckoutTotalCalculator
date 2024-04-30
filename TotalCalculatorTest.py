@@ -45,6 +45,13 @@ class TestCheckoutSystem(unittest.TestCase):
         # ID taxes only 'everything else'
         self.assertAlmostEqual(calculate_total('ID', items), 50 + 100 + 159)  # 159 = 150 + 6% tax
 
+    def test_invalid_state(self):
+        """
+        Test handling of an unsupported state code.
+        """
+        items = [{'type': 'everything else', 'price': 100.00}]
+        with self.assertRaises(ValueError):
+            calculate_total('XX', items)
 
 if __name__ == '__main__':
     unittest.main()
