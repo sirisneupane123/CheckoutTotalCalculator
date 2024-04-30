@@ -33,6 +33,18 @@ class TestCheckoutSystem(unittest.TestCase):
         items = [{'type': 'everything else', 'price': 100.00}]
         self.assertAlmostEqual(calculate_total('WA', items), 109.38)
 
+    def test_multiple_items_with_exemptions(self):
+        """
+        Test multiple items, including tax-exempt and taxable items, in Idaho.
+        """
+        items = [
+            {'type': 'Wic Eligible food', 'price': 50.00},
+            {'type': 'Software', 'price': 100.00},
+            {'type': 'everything else', 'price': 150.00}
+        ]
+        # ID taxes only 'everything else'
+        self.assertAlmostEqual(calculate_total('ID', items), 50 + 100 + 159)  # 159 = 150 + 6% tax
+
 
 if __name__ == '__main__':
     unittest.main()
