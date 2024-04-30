@@ -53,5 +53,13 @@ class TestCheckoutSystem(unittest.TestCase):
         with self.assertRaises(ValueError):
             calculate_total('XX', items)
 
+    def test_invalid_item_type(self):
+        """
+        Test handling of an unsupported item type.
+        """
+        items = [{'type': 'unknown type', 'price': 100.00}]
+        with self.assertRaises(ValueError):
+            calculate_total('WA', items)
+
 if __name__ == '__main__':
     unittest.main()
