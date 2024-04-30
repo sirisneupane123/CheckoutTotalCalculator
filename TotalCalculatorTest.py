@@ -26,6 +26,13 @@ class TestCheckoutSystem(unittest.TestCase):
         items = [{'type': 'Software', 'price': 200.00}]
         self.assertAlmostEqual(calculate_total('ID', items), 200.00)
 
+    def test_high_tax_state_wa(self):
+        """
+        Test items purchased in Washington state with a high tax rate.
+        """
+        items = [{'type': 'everything else', 'price': 100.00}]
+        self.assertAlmostEqual(calculate_total('WA', items), 109.38)
+
 
 if __name__ == '__main__':
     unittest.main()
