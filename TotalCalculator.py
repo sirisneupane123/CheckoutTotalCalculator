@@ -27,3 +27,19 @@ def calculate_total(state_code, items):
 
     # Return the total rounded to two decimal places.
     return round(total, 2)
+
+def _calculate_item_total(state_code, item):
+    """
+    Calculate the total price of a single item, considering the state tax exemptions.
+
+    Args:
+        state_code (str): The state code.
+        item (dict): Contains 'type' (str) and 'price' (float).
+
+    Returns:
+        float: The total price of the item after tax.
+    """
+    # Calculate and return item price including tax rate.
+    tax_rate = _get_tax_rate(state_code, item['type'])
+    return item['price'] * (1 + tax_rate)
+
