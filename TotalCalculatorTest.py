@@ -19,6 +19,13 @@ class TestCheckoutSystem(unittest.TestCase):
         items = [{'type': 'everything else', 'price': 100.00}]
         self.assertAlmostEqual(calculate_total('ID', items), 106.00)
 
+    def test_tax_exempt_software_id(self):
+        """
+        Test purchasing software in Idaho, which is exempt from sales tax.
+        """
+        items = [{'type': 'Software', 'price': 200.00}]
+        self.assertAlmostEqual(calculate_total('ID', items), 200.00)
+
 
 if __name__ == '__main__':
     unittest.main()
